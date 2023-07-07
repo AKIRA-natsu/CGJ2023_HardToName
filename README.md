@@ -1,0 +1,2 @@
+# CGJ2023_HardToName
+五个萌新关于CGJ2023的摆烂历史
