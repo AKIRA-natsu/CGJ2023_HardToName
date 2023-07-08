@@ -1,4 +1,5 @@
 using AKIRA.Manager;
+using AKIRA.UIFramework;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -11,9 +12,17 @@ namespace Modules.Item
     {
         private ItemTipCtrl _itemTipCtrl;
 
+        private Sprite _sprite;
+
+        protected override void Start()
+        {
+            base.Start();
+            _sprite = this.transform.GetComponent<SpriteRenderer>().sprite;
+        }
         public void Pack(int characterId)
         {
             itemInfo.OwnerId = characterId;
+            ItemManager.Instance.PackItem(this.itemInfo,_sprite);
         }
         
         public bool Use()
@@ -22,6 +31,8 @@ namespace Modules.Item
             else
             {
                 itemInfo.IsUse = 1;
+                ItemManager.Instance.UseItem(itemInfo);
+                UIManager.Instance.Get<BackpackPanel>().UseItem(itemInfo.ItemId);
                 return true;
             }
         }

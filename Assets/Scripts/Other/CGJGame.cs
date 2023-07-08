@@ -8,6 +8,7 @@ public class CGJGame {
     public class Path {
         public const string DialogConfig = "Config/DialogConfig";
         public const string ItemTip = "Prefabs/Item/ItemTipCtrl";
+        public const string BackpackItemImg = "Prefabs/Item/BackpackItemImg";
     }
 
     public class Event {

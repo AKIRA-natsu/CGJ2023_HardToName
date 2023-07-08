@@ -12,13 +12,22 @@ namespace Modules.Item
     public class NonConsumeItem : Item,IInteract,ITip,IPool
     {
         private ItemTipCtrl _itemTipCtrl;
+        private Sprite _sprite;
+
+        protected override void Start()
+        {
+            base.Start();
+            _sprite = this.transform.GetComponent<SpriteRenderer>().sprite;
+        }
         public void Pack(int characterId)
         {
             itemInfo.OwnerId = characterId;
+            ItemManager.Instance.PackItem(this.itemInfo,_sprite);
         }
 
         public bool Use()
         {
+            UIManager.Instance.Get<BackpackPanel>().UseItem(itemInfo.ItemId);
             return true;
         }
 

@@ -10,7 +10,7 @@ namespace Modules.Item
 
         [FormerlySerializedAs("ItemInfo")] public ItemInfo itemInfo;
 
-        protected void Start()
+        protected virtual void Start()
         {
             InitData();
         }

@@ -2,7 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using AKIRA.Data;
 using AKIRA.Manager;
+using AKIRA.UIFramework;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace Modules.Item
 {
@@ -10,14 +12,15 @@ namespace Modules.Item
     public class ItemManager : MonoSingleton<ItemManager>
     {
         /// <summary>
-        /// 游戏场景中所有物品信息列表,暂时不需要用
+        /// 玩家收集到的物品
         /// </summary>
-        private List<ItemInfo> _gameItemContainer = new List<ItemInfo>();
-        
+        private List<ItemInfo> _playerItemContainer = new List<ItemInfo>();
+
         /// <summary>
         /// 物品信息列表
         /// </summary>
         private ItemInfo[] _itemInfosContainer;
+
 
         protected override void Awake()
         {
@@ -40,12 +43,32 @@ namespace Modules.Item
             return _itemInfosContainer.FirstOrDefault(item => item.ItemId == itemID);
         }
 
+        public void PackItem(ItemInfo itemInfo,Sprite sprite)
+        {
+            if (!_playerItemContainer.Contains(itemInfo))
+            {
+                _playerItemContainer.Add(itemInfo);
+                UIManager.Instance.Get<BackpackPanel>().GetItem(sprite,itemInfo.ItemId);
+            }
+        }
+
+        public void UseItem(ItemInfo itemInfo)
+        {
+            if (_playerItemContainer.Contains(itemInfo))
+
+                _playerItemContainer.Remove(itemInfo);
+        }
+
+        public List<ItemInfo> GetPlayerItem()
+        {
+            return _playerItemContainer;
+        }
+
         /// <summary>
         /// 加载游戏内所有物品的信息Json
         /// </summary>
         public void LoadItemInfo()
         {
-            
         }
 
         /// <summary>
@@ -53,9 +76,6 @@ namespace Modules.Item
         /// </summary>
         public void SaveItemInfo()
         {
-            
         }
-
-
     }
 }
