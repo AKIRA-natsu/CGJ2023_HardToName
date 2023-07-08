@@ -47,5 +47,6 @@ namespace AKIRA.UIFramework {
         /// 测试
         /// </summary>
         Test,
+        Dialog,
     }
 }
