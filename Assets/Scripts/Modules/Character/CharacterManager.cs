@@ -44,6 +44,8 @@ public class CharacterManager : MonoSingleton<CharacterManager>, ISource, IUpdat
 
         EventManager.Instance.AddEventListener(CGJGame.Event.OnSwitchCameraMain, SwtichPlayer);
         EventManager.Instance.AddEventListener(CGJGame.Event.OnSwitchCameraSub, DisablePlayer);
+        EventManager.Instance.AddEventListener(CGJGame.Event.OnDialogStart, _ => UpdateCursor(true));
+        EventManager.Instance.AddEventListener(CGJGame.Event.OnDialogCompleted, _ => UpdateCursor(false));
     }
 
     /// <summary>
@@ -132,5 +134,6 @@ public class CharacterManager : MonoSingleton<CharacterManager>, ISource, IUpdat
     public void UpdateCursor(bool enabled) {
         cursorEnabled = enabled;
         Cursor.visible = enabled;
+        CameraExtend.GetCamera(GameData.Camera.Main).GetComponent<CinemachineFreeLook>().enabled = !enabled;
     }
 }

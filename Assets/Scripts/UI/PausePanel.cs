@@ -25,7 +25,6 @@ namespace AKIRA.UIFramework {
             base.Show();
             UpdateManager.Instance.EnableGroupUpdate(false);
             GameManager.Instance.Switch(GameState.Pause);
-            CameraExtend.GetCamera(GameData.Camera.Main).GetComponent<CinemachineFreeLook>().enabled = false;
             CharacterManager.Instance.UpdateCursor(true);
         }
 
@@ -33,9 +32,6 @@ namespace AKIRA.UIFramework {
             base.Hide();
             UpdateManager.Instance.EnableGroupUpdate(true);
             GameManager.Instance.Switch(GameState.Playing);
-            var camera = CameraExtend.GetCamera(GameData.Camera.Main);
-            if (camera != null)
-                camera.GetComponent<CinemachineFreeLook>().enabled = true;
             CharacterManager.Instance?.UpdateCursor(false);
         }
 
