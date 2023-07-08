@@ -1,26 +1,53 @@
 using System.Collections.Generic;
 using System.Linq;
+using AKIRA.Data;
 using AKIRA.Manager;
 using DG.Tweening;
 using Microsoft.Unity.VisualStudio.Editor;
 using Modules.Item;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Image = UnityEngine.UIElements.Image;
 
 namespace AKIRA.UIFramework {
     [Win(WinEnum.Backpack, "Prefabs/UI/Backpack", WinType.Normal)]
-    public class BackpackPanel : BackpackPanelProp,IPool
+    public class BackpackPanel : BackpackPanelProp,IPool,IUpdate
     {
         private RectTransform _backContainerTr;
+
+        private float _timer;
+        
         public override void Awake(object obj) {
             base.Awake(obj);
             _backContainerTr = BackContainer.transform.GetComponent<RectTransform>();
             GameManager.Instance.RegistOnStateChangeAction(ActivePanel);
+            ControllerTips(1);
+            SwitchCameraBtn.onClick.AddListener(OnSwitchSubCamera);
+            EventManager.Instance.AddEventListener( CGJGame.Event.OnSwitchCameraMain, OnSwitchMainCamera);
+            SwitchCameraBtn.interactable = false;
+            this.Regist(GameData.Group.UI);
         }
 
         private void ActivePanel(GameState state)
         {
             this.Active = state == GameState.Playing;
+        }
+
+        private void OnSwitchSubCamera()
+        {
+           EventManager.Instance.TriggerEvent( CGJGame.Event.OnSwitchCameraSub);
+           SwitchCameraBtn.interactable = false;
+        }
+        
+        private void OnSwitchMainCamera(object ob=null)
+        {
+            SwitchCameraBtn.interactable = true;
+        }
+
+        private void ControllerTips(int endScale=0)
+        {
+            if ((int)(TipsText.localScale.x)==endScale) return;
+                TipsText.DOScale(Vector3.one * endScale, 0.3f).SetEase(Ease.OutBack);
         }
         /// <summary>
         /// 显示背包
@@ -111,6 +138,23 @@ namespace AKIRA.UIFramework {
         public void Recycle(object data = null)
         {
             
+        }
+
+        public void GameUpdate()
+        {
+            //if (GameMap.Instance.Level!=1) return;
+            _timer+=Time.deltaTime;
+            if (_timer > 10)
+            {
+                ControllerTips(1);
+                _timer = 0;
+            }
+
+            if (Keyboard.current.anyKey.wasPressedThisFrame)
+            {
+                _timer = 0;
+                ControllerTips();
+            }
         }
     }
 }
