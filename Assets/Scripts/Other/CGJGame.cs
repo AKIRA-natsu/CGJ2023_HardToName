@@ -6,6 +6,7 @@ public class CGJGame {
     /// 资产路径
     /// </summary>
     public class Path {
+        public const string Xlsx = "Assets/Assets/游戏设计表.xlsx";
         public const string DialogConfig = "Config/DialogConfig";
         public const string ItemTip = "Prefabs/Item/ItemTipCtrl";
         public const string BackpackItemImg = "Prefabs/Item/BackpackItemImg";
@@ -14,6 +15,9 @@ public class CGJGame {
     public class Event {
         public const string OnDialogStart = "OnDialogStart";
         public const string OnDialogCompleted = "OnDialogCompleted";
+
+        public const string OnSwitchCameraSub = "OnSwitchCameraSub";
+        public const string OnSwitchCameraMain = "OnSwitchCameraMain";
     }
 
     public class DialogID {
