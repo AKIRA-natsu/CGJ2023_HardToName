@@ -89,8 +89,8 @@ public class CharacterManager : MonoSingleton<CharacterManager>, ISource, IUpdat
     /// <param name="id"></param>
     private void SwtichPlayer(object data) {
         int id = Convert.ToInt32(data);
-        if (id == curCharacterID)
-            return;
+        // if (id == curCharacterID)
+        //     return;
         curCharacterID = id;
         CameraExtend.GetCamera(GameData.Camera.Sub).gameObject.SetActive(false);
         var camera = CameraExtend.GetCamera(GameData.Camera.Main);
