@@ -24,7 +24,7 @@ namespace Modules.Item
         }
     }
 
-    public interface IInteract
+    public interface IInteract : ITip
     {
         /// <summary>
         /// 捡取物品

@@ -1,11 +1,14 @@
+using System.Linq;
+using AKIRA.Data;
 using AKIRA.Manager;
+using Modules.Item;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 /// <summary>
 /// 玩家表现
 /// </summary>
-public class CharacterBehaviour : MonoBehaviour, IClick {
+public class CharacterBehaviour : MonoBehaviour, IClick, IUpdate {
     // 摄像机看向视角
     public Transform center;
     // id
@@ -14,6 +17,14 @@ public class CharacterBehaviour : MonoBehaviour, IClick {
     private Vector3 moveDir;
     // 移动速度
     public float speed;
+    // 检测半径
+    [SerializeField]
+    private float radius;
+    
+    private void Start() {
+        EventManager.Instance.AddEventListener(CGJGame.Event.OnSwitchCameraMain, _ => this.Regist(GameData.Group.AI));
+        EventManager.Instance.AddEventListener(CGJGame.Event.OnSwitchCameraSub, _ => this.Remove(GameData.Group.AI));
+    }
 
     /// <summary>
     /// 移动
@@ -38,5 +49,21 @@ public class CharacterBehaviour : MonoBehaviour, IClick {
 
     public void OnClick() {
         EventManager.Instance.TriggerEvent(CGJGame.Event.OnSwitchCameraMain, characterID);
+    }
+
+    public void GameUpdate() {
+        // 物体检测
+        var item = Physics.OverlapSphere(this.transform.position, radius, 1 << Layer.Item)?.ElementAt(0);
+        if (item != null) {
+            if (item.TryGetComponent<ITip>(out ITip tip)) {
+                $"显示物体信息 {tip}".Log();
+                tip.ShowTip(this.transform.position);
+                if (tip is IInteract && Keyboard.current.fKey.wasPressedThisFrame) {
+                    $"使用了物体 {tip}".Log();
+                    (tip as IInteract).Pack(characterID);
+                }
+            }
+        }
+        
     }
 }

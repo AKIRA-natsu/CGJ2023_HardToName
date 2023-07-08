@@ -29,6 +29,11 @@ public static class Layer {
     /// </summary>
     public static readonly int UI = 5;
                 
+    /// <summary>
+    /// Item
+    /// </summary>
+    public static readonly int Item = 6;
+                
 }
 
             
