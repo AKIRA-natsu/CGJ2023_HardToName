@@ -34,7 +34,6 @@ public class CharacterManager : MonoSingleton<CharacterManager>, ISource, IUpdat
     private PlayerInput input;
 
     private bool cursorEnabled = false;
-    public bool CursorEnabled => cursorEnabled;
 
     public async UniTask Load() {
         await UniTask.Yield();
@@ -96,7 +95,7 @@ public class CharacterManager : MonoSingleton<CharacterManager>, ISource, IUpdat
         var freeLook = camera.GetComponent<CinemachineFreeLook>();
         freeLook.Follow = behaviours[id - 1].transform;
         freeLook.LookAt = behaviours[id - 1].center;
-        Cursor.visible = cursorEnabled = false;
+        UpdateCursor(false);
 
         inputAction.Enable();
         this.Regist(GameData.Group.AI, UpdateMode.FixedUpdate);
@@ -110,19 +109,28 @@ public class CharacterManager : MonoSingleton<CharacterManager>, ISource, IUpdat
     private void DisablePlayer(object data) {
         this.Remove(GameData.Group.AI, UpdateMode.FixedUpdate);
         inputAction.Disable();
-        Cursor.visible = cursorEnabled = true;
+        UpdateCursor(true);
     }
 
     public void GameUpdate() {
-        GetBehaviour().Move(inputAction.Player.Move.ReadValue<Vector2>());
-        if (Keyboard.current.leftAltKey.wasPressedThisFrame) {
-            cursorEnabled = !cursorEnabled;
-
-            if (cursorEnabled) {
-                Cursor.visible = true;
-            } else {
-                Cursor.visible = false;
-            }
+        if (GameManager.IsStateEqual(GameState.Pause)) {
+            return;
         }
+
+        if (!cursorEnabled)
+            GetBehaviour().Move(inputAction.Player.Move.ReadValue<Vector2>());
+        
+        if (Keyboard.current.leftAltKey.wasPressedThisFrame) {
+            UpdateCursor(!cursorEnabled);
+        }
+    }
+
+    /// <summary>
+    /// 更新鼠标
+    /// </summary>
+    /// <param name="enabled"></param>
+    public void UpdateCursor(bool enabled) {
+        cursorEnabled = enabled;
+        Cursor.visible = enabled;
     }
 }

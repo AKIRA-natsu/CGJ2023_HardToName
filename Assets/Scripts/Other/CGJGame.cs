@@ -1,3 +1,4 @@
+using UnityEngine;
 /// <summary>
 /// 数据管理类
 /// </summary>
@@ -21,11 +22,30 @@ public class CGJGame {
         public const string OnSwitchCameraMain = "OnSwitchCameraMain";
     }
 
+    /// <summary>
+    /// Dialog Id 对应表里的Scene ID
+    /// </summary>
     public class DialogID {
         public const string Scene0_1 = "0-1";
         public const string Scene1_1 = "1-1";
         public const string Scene1_2 = "1-2";
         public const string Scene1_3 = "1-3";
         public const string Scene2_1 = "2-1";
+        public const string Scene2_2 = "2-2";
+        public const string Scene3_1 = "3-1";
+        public const string Scene3_2 = "3-2";
+        public const string Scene3_3 = "3-3";
+        public const string Scene3_4 = "3-4";
+        
+    }
+
+    public class Number {
+        /// <summary>
+        /// 获得随机数字
+        /// </summary>
+        /// <returns></returns>
+        public static int GetRandomNum() {
+            return Random.Range(0, 9);
+        }
     }
 }
