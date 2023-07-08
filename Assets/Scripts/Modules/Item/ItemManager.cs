@@ -7,7 +7,7 @@ using Cysharp.Threading.Tasks;
 namespace Modules.Item
 {
     [Source("Source/ItemManager", GameData.Source.Manager, 0)]
-    public class ItemManager : MonoSingleton<ItemManager>,ISource
+    public class ItemManager : MonoSingleton<ItemManager>
     {
         /// <summary>
         /// 游戏场景中所有物品信息列表,暂时不需要用
@@ -25,12 +25,11 @@ namespace Modules.Item
             _itemInfosContainer = CGJGame.Path.DialogConfig.Load<DialogConfig>().GetItemInfo().ToArray();
         }
 
-        public async UniTask Load()
-        {
-            await UniTask.Yield();
-            await UniTask.Delay(2000);
-            "awdawd".Log();
-        }
+        // public async UniTask Load()
+        // {
+        //     await UniTask.Yield();
+        //     await UniTask.Delay(2000);
+        // }
 
         /// <summary>
         /// 通过物品的id获取物品的信息
