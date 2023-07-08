@@ -53,17 +53,17 @@ public class CharacterBehaviour : MonoBehaviour, IClick, IUpdate {
 
     public void GameUpdate() {
         // 物体检测
-        var item = Physics.OverlapSphere(this.transform.position, radius, 1 << Layer.Item)?.ElementAt(0);
-        if (item != null) {
-            if (item.TryGetComponent<ITip>(out ITip tip)) {
-                $"显示物体信息 {tip}".Log();
-                tip.ShowTip(this.transform.position);
-                if (tip is IInteract && Keyboard.current.fKey.wasPressedThisFrame) {
-                    $"使用了物体 {tip}".Log();
-                    (tip as IInteract).Pack(characterID);
-                }
+        var items = Physics.OverlapSphere(this.transform.position, radius, 1 << Layer.Item);
+        if (items.Length == 0)
+            return;
+        var item = items.ElementAt(0);
+        if (item.TryGetComponent<ITip>(out ITip tip)) {
+            $"显示物体信息 {tip}".Log();
+            tip.ShowTip(this.transform.position);
+            if (tip is IInteract && Keyboard.current.fKey.wasPressedThisFrame) {
+                $"使用了物体 {tip}".Log();
+                (tip as IInteract).Pack(characterID);
             }
         }
-        
     }
 }

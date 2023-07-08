@@ -13,6 +13,7 @@ public class GameMap : MonoSingleton<GameMap>, ISource {
         levels = this.transform.GetComponentsInChildren<Level>();
         Level = 0;
         EventManager.Instance.AddEventListener(GameData.Event.OnAppSourceEnd, FirstShowWorldCamera);
+        EventManager.Instance.AddEventListener(CGJGame.Event.OnSwitchCameraSub, _ => SwitchToWorldCamera());
     }
 
     /// <summary>
