@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using AKIRA.Manager;
 using DG.Tweening;
 using Microsoft.Unity.VisualStudio.Editor;
@@ -50,30 +51,46 @@ namespace AKIRA.UIFramework {
         private void UpdateBackPack()
         {
             int n = 0;
-            foreach (var item in ItemManager.Instance.GetPlayerItem())
-            {
-                
-            }
             for (int i = 0; i < _backContainerTr.childCount; i++)
             {
                 if (_backContainerTr.GetChild(i).TryGetComponent<BackpackItemImg>(out var backpackItemImg))
                 {
-                    if (_backContainerTr.GetChild(i).gameObject.activeSelf)
-                    {
-                        backpackItemImg.UpdatePos(-(n * 150 + 20));
-                        n++;
-                    }
+                    backpackItemImg.UpdatePos(-(n * 150 + 20));
+                    n++;
                 }
             }
         }
 
-        public void GetItem(Sprite sprite,int id)
+        public void ChangeCharacter(int characterId)
         {
-           var ob= ObjectPool.Instance.Instantiate(CGJGame.Path.ItemTip, Vector3.zero, Quaternion.identity, this._backContainerTr);
-           ob.transform.GetComponent<BackpackItemImg>().SetInfo(sprite,id); 
+            for (var i = 0; i < _backContainerTr.childCount; i++)
+            {
+                ObjectPool.Instance.Destory(_backContainerTr.gameObject);
+            }
+
+            foreach (var item in ItemManager.Instance.GetPlayerItem().
+                         Where(item => item.OwnerId == characterId).Where(item => item.IsUse==0))
+            {
+                GetItem(item.ItemId);
+            }
+        }
+        public void GetItem(int id)
+        {
+            GetItemOb().transform.GetComponent<BackpackItemImg>().SetInfo(GetSprite(id),id); 
            UpdateBackPack();
         }
 
+        private Sprite GetSprite(int id)
+        {
+            return CGJGame.Path.ItemSprite.Load<Sprite>();
+        }
+
+        private GameObject GetItemOb()
+        {
+             return ObjectPool.Instance.Instantiate
+                (CGJGame.Path.BackpackItemImg, Vector3.zero, Quaternion.identity, this._backContainerTr);
+        }
+        
         public void UseItem(int id)
         {
             for (int i = 0; i < _backContainerTr.childCount; i++)

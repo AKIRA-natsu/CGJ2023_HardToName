@@ -48,7 +48,7 @@ namespace Modules.Item
             if (!_playerItemContainer.Contains(itemInfo))
             {
                 _playerItemContainer.Add(itemInfo);
-                UIManager.Instance.Get<BackpackPanel>().GetItem(sprite,itemInfo.ItemId);
+                UIManager.Instance.Get<BackpackPanel>().GetItem(itemInfo.ItemId);
             }
         }
 
