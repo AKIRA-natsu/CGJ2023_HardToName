@@ -6,23 +6,22 @@ namespace Modules.Item
 {
     public class Item : MonoBehaviour
     {
-       [SerializeField]private string itemId;
+        [SerializeField] private int itemId;
 
-       public ItemInfo ItemInfo;
+        [FormerlySerializedAs("ItemInfo")] public ItemInfo itemInfo;
 
-       protected void Start()
-       {
-           InitData();
-       }
-
-       /// <summary>
-       /// 初始化物品信息
-       /// </summary>
-       protected virtual void InitData()
+        protected void Start()
         {
-            ItemInfo=ItemManager.Instance.GetItemInfo(itemId);
+            InitData();
         }
-        
+
+        /// <summary>
+        /// 初始化物品信息
+        /// </summary>
+        protected virtual void InitData()
+        {
+            itemInfo = ItemManager.Instance.GetItemInfo(itemId);
+        }
     }
 
     public interface IInteract
@@ -30,11 +29,12 @@ namespace Modules.Item
         /// <summary>
         /// 捡取物品
         /// </summary>
-        void Pack();
+        void Pack(int characterId );
+
         /// <summary>
         /// 使用物品
         /// </summary>
-        void Use();
+        bool Use();
     }
 
     /// <summary>
@@ -42,20 +42,23 @@ namespace Modules.Item
     /// </summary>
     public interface ITip
     {
-        void ShowTip();
+        void ShowTip(Vector3 pos);
+        void HideTip();
     }
 
+    [Serializable]
     public class ItemInfo
     {
         /// <summary>
         /// 物品ID
         /// </summary>
-        public string ItemId;
+        public int ItemId;
+
         /// <summary>
         /// 提示内容
         /// </summary>
-        public string TipContent ;
-        
+        public string TipContent;
+
         /// <summary>
         /// 物体名称
         /// </summary>
@@ -64,11 +67,11 @@ namespace Modules.Item
         /// <summary>
         /// 拥有者的ID
         /// </summary>
-        public string OwnerId;
-        
+        public int OwnerId;
+
         /// <summary>
-        /// 是否使用
+        /// 是否使用,0未使用1已经使用
         /// </summary>
-        public bool IsUse;
+        public int IsUse;
     }
 }
