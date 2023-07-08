@@ -8,6 +8,7 @@ public class DialogConfig : ScriptableObject {
     /// <summary>
     /// Excel 路径
     /// </summary>
+    [SelectionPop(typeof(CGJGame.Path))]
     public string excelPath;
 
     /// <summary>
