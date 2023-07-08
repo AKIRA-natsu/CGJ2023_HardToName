@@ -4,6 +4,7 @@ using UnityEditor;
 using Object = UnityEngine.Object;
 using AKIRA.Data;
 using System.Collections.Generic;
+using Modules.Item;
 
 [CustomEditor(typeof(DialogConfig))]
 public class DialogConfigInspector : Editor {
@@ -31,6 +32,9 @@ public class DialogConfigInspector : Editor {
 
         if (GUILayout.Button("Update Charactors")) {
             config.SetCharacters(config.excelPath.ExcelConvertToClass<Character>(GameData.DLL.Default, 1).ToArray());
+        }
+        if (GUILayout.Button("Update ItemInfo")) {
+            config.SetItems(config.excelPath.ExcelConvertToClass<ItemInfo>(GameData.DLL.Default, 2).ToArray());
         }
     }
 }
