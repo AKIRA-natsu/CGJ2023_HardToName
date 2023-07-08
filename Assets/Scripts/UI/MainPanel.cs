@@ -7,7 +7,6 @@ namespace AKIRA.UIFramework {
         public override void Awake(object obj) {
             base.Awake(obj);
             this.EnterBtn.onClick.AddListener(OnGameStart);
-            this.SettingBtn.onClick.AddListener(() => {});
             this.ExitBtn.onClick.AddListener(
                 #if UNITY_EDITOR
                 () => UnityEditor.EditorApplication.isPlaying = false
