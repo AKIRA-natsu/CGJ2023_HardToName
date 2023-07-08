@@ -9,6 +9,7 @@ public class CGJGame {
         public const string Xlsx = "Assets/Assets/游戏设计表.xlsx";
         public const string DialogConfig = "Config/DialogConfig";
         public const string ItemTip = "Prefabs/Item/ItemTipCtrl";
+        public const string BackpackItemImg = "Prefabs/Item/BackpackItemImg";
     }
 
     public class Event {

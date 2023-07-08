@@ -48,5 +48,9 @@ namespace AKIRA.UIFramework {
         /// </summary>
         Test,
         Dialog,
+        /// <summary>
+        /// 背包界面
+        /// </summary>
+        Backpack,
     }
 }
