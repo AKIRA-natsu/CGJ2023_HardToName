@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using AKIRA.Data;
 using AKIRA.Manager;
+using AKIRA.UIFramework;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Cinemachine;
@@ -99,6 +100,7 @@ public class CharacterManager : MonoSingleton<CharacterManager>, ISource, IUpdat
 
         inputAction.Enable();
         this.Regist(GameData.Group.AI, UpdateMode.FixedUpdate);
+        UIManager.Instance.Get<BackpackPanel>().ChangeCharacter(curCharacterID);
     }
 
     /// <summary>
