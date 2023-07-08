@@ -14,10 +14,12 @@ public class Character {
 }
 
 [Source("Source/Manager/[CharacterManager]", GameData.Source.Manager)]
-public class CharacterManager : MonoSingleton<CharacterManager>, ISource
-{
+public class CharacterManager : MonoSingleton<CharacterManager>, ISource {
     [SerializeField]
     private Character[] characters;
+
+    [SerializeField]
+    private CharacterBehaviour[] behaviours;
 
     public async UniTask Load() {
         await UniTask.Yield();
@@ -45,4 +47,11 @@ public class CharacterManager : MonoSingleton<CharacterManager>, ISource
     public string GetCharacterName(string id) {
         return characters.SingleOrDefault(character => character.CharacterID.ToString().Equals(id))?.Name ?? default;
     }
+
+    /// <summary>
+    /// 获得表现
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public CharacterBehaviour GetBehaviour(int id) => behaviours?.ElementAt(id) ?? default;
 }

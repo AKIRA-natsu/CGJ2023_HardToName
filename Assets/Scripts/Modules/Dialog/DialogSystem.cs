@@ -44,5 +44,6 @@ public class DialogSystem : Singleton<DialogSystem> {
     public void StartDialog(string id) {
         var curDialogs = dialogs.Where(dialog => dialog.Scene.Equals(id));
         UIManager.Instance.Get<DialogPanel>().StartDialogs(curDialogs.ToArray());
+        EventManager.Instance.TriggerEvent(CGJGame.Event.OnDialogStart);
     }
 }

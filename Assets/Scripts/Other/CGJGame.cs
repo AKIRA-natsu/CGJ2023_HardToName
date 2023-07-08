@@ -11,6 +11,7 @@ public class CGJGame {
     }
 
     public class Event {
+        public const string OnDialogStart = "OnDialogStart";
         public const string OnDialogCompleted = "OnDialogCompleted";
     }
 
