@@ -818,6 +818,37 @@ MonoBehaviour:
     OwnerId: 0
     IsUse: 0
     IsPackUp: 1
+--- !u!1 &8775508260468269579
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5067672205202566060}
+  m_Layer: 0
+  m_Name: CamraTrans
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5067672205202566060
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8775508260468269579}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2872025624797535}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &99951239271125632
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3873,6 +3904,37 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 706247500742599729}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &811180899874290661 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 183799754500841428, guid: 75087ca99ecc4264ab937b89c140d230,
+    type: 3}
+  m_PrefabInstance: {fileID: 706247500742599729}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &5790875208283313580
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 811180899874290661}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.42, y: 2.61, z: 1.51}
+  m_Center: {x: -0.79, y: 0.000000014901161, z: 0}
+--- !u!114 &3684816770422499497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 811180899874290661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02f013132e6a2c548ac55dc0163023ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &706247500742669393
 PrefabInstance:
   m_ObjectHideFlags: 0
