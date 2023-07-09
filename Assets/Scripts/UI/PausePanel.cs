@@ -17,7 +17,7 @@ namespace AKIRA.UIFramework {
                 UnityEngine.Application.Quit
                 #endif
             );
-            Hide();
+            base.Hide();
             this.Regist(GameData.Group.UI);
         }
 
