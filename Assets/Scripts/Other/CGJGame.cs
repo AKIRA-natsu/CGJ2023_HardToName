@@ -20,6 +20,8 @@ public class CGJGame {
 
         public const string OnSwitchCameraSub = "OnSwitchCameraSub";
         public const string OnSwitchCameraMain = "OnSwitchCameraMain";
+
+        public const string OnPackItem = "OnPackItem";
     }
 
     /// <summary>

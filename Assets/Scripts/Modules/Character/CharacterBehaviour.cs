@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using AKIRA.Data;
 using AKIRA.Manager;
@@ -22,8 +23,14 @@ public class CharacterBehaviour : MonoBehaviour, IClick, IUpdate {
     private float radius;
     
     private void Start() {
-        EventManager.Instance.AddEventListener(CGJGame.Event.OnSwitchCameraMain, _ => this.Regist(GameData.Group.AI));
-        EventManager.Instance.AddEventListener(CGJGame.Event.OnSwitchCameraSub, _ => this.Remove(GameData.Group.AI));
+        EventManager.Instance.AddEventListener(CGJGame.Event.OnSwitchCameraMain, data => {
+            if (Convert.ToInt32(data) == characterID)
+                this.Regist(GameData.Group.AI);
+        });
+        EventManager.Instance.AddEventListener(CGJGame.Event.OnSwitchCameraSub, _ => {
+            if (CharacterManager.Instance.GetBehaviour().Equals(this))
+                this.Remove(GameData.Group.AI);
+        });
     }
 
     /// <summary>
@@ -53,17 +60,9 @@ public class CharacterBehaviour : MonoBehaviour, IClick, IUpdate {
 
     public void GameUpdate() {
         // 物体检测
-        var items = Physics.OverlapSphere(this.transform.position, radius, 1 << Layer.Item);
-        if (items.Length == 0)
-            return;
-        var item = items.ElementAt(0);
-        if (item.TryGetComponent<ITip>(out ITip tip)) {
-            $"显示物体信息 {tip}".Log();
-            tip.ShowTip(this.transform.position);
-            if (tip is IInteract && Keyboard.current.fKey.wasPressedThisFrame) {
-                $"使用了物体 {tip}".Log();
-                (tip as IInteract).Pack(characterID);
-            }
+        if (Keyboard.current.fKey.wasPressedThisFrame) {
+            "触发事件".Log();
+            EventManager.Instance.TriggerEvent(CGJGame.Event.OnPackItem);
         }
     }
 }
