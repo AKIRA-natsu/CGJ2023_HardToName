@@ -1,6 +1,7 @@
 using System.Collections;
 using AKIRA.Data;
 using AKIRA.Manager;
+using AKIRA.Manager.Audio;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -55,6 +56,8 @@ namespace AKIRA.UIFramework {
         /// <param name="name"></param>
         /// <param name="text"></param>
         private async void ShowText(string name, string text) {
+            var audioPlayer = AudioManager.Instance.Play(GameData.Audio.KeyboardKock, true);
+            audioPlayer.UpdateSpeed(2f);
             this.Name.text = name;
             this.Text.text = default;
             isUpdateContent = true;
@@ -64,6 +67,7 @@ namespace AKIRA.UIFramework {
                 this.Text.text += text[i];
             }
             isUpdateContent = false;
+            AudioManager.Instance.Stop(audioPlayer);
         }
 
         public void GameUpdate() {

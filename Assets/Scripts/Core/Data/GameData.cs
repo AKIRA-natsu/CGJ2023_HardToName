@@ -132,7 +132,10 @@ namespace AKIRA.Data {
         #endregion
 
         #region 音频
-        public class Audio {}
+        public class Audio {
+            public const string KeyboardKock = "KeyboardKock";
+            public const string Bg = "Bg";
+        }
         #endregion
 
         #region 事件
