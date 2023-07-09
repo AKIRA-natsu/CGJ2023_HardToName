@@ -8,6 +8,7 @@ public class DialogTrigger : MonoBehaviour {
     public string dialogID;
 
     private void OnTriggerEnter(Collider other) {
+        this.gameObject.SetActive(false);
         DialogSystem.Instance.StartDialog(dialogID);
     }
 }
