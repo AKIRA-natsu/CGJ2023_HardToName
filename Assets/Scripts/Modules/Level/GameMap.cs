@@ -5,6 +5,7 @@ using UnityEngine;
 
 [Source("Source/Base/[GameMap]", GameData.Source.Scene, 1)]
 public class GameMap : MonoSingleton<GameMap>, ISource {
+    [SerializeField]
     private Level[] levels;
     public int Level { get; private set; }
 
@@ -14,6 +15,14 @@ public class GameMap : MonoSingleton<GameMap>, ISource {
         Level = 0;
         EventManager.Instance.AddEventListener(GameData.Event.OnAppSourceEnd, FirstShowWorldCamera);
         EventManager.Instance.AddEventListener(CGJGame.Event.OnSwitchCameraSub, _ => SwitchToWorldCamera());
+        EventManager.Instance.AddEventListener(GameData.Event.OnGameStart, EnterFirstLevel);
+
+    }
+
+    private void EnterFirstLevel(object data)
+    {
+        EventManager.Instance.RemoveEventListener(GameData.Event.OnGameStart, EnterFirstLevel);
+        NextLevel();
     }
 
     /// <summary>
@@ -39,7 +48,7 @@ public class GameMap : MonoSingleton<GameMap>, ISource {
     /// </summary>
     private void ShowLevel() {
         for (int i = 0; i < levels.Length; i++)
-            levels[i].gameObject.SetActive(i == Level);
+            levels[i].OnLevelStart(i == Level);
     }
 
     /// <summary>

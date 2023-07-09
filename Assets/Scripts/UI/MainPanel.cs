@@ -17,6 +17,8 @@ namespace AKIRA.UIFramework {
 
             GameManager.Instance.RegistStateAction(GameState.Playing, Hide);
             GameManager.Instance.RegistStateAction(GameState.Ready, Show);
+            
+            this.Hide();
         }
 
         /// <summary>
