@@ -30,7 +30,7 @@ namespace Modules.Item
         {
             _itemTipCtrl= ObjectPool.Instance.Instantiate<ItemTipCtrl>(CGJGame.Path.ItemTip,pos, Quaternion.identity,this.transform
             ,Space.Self,Vector3.zero);
-            _itemTipCtrl.transform.localPosition = Vector3.up * 1.2f;
+            _itemTipCtrl.transform.localPosition = Vector3.up * 1;
             _itemTipCtrl.Show(itemInfo.TipContent);
         }
 
