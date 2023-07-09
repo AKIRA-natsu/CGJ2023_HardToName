@@ -196,7 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d56d78c1caea0974cb369ddc1bb66446, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enableVolume: 0
+  enableVolume: 1
 --- !u!1 &802550443821199602
 GameObject:
   m_ObjectHideFlags: 0

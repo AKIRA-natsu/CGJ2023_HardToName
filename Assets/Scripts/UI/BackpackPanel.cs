@@ -3,7 +3,6 @@ using System.Linq;
 using AKIRA.Data;
 using AKIRA.Manager;
 using DG.Tweening;
-using Microsoft.Unity.VisualStudio.Editor;
 using Modules.Item;
 using UnityEngine;
 using UnityEngine.InputSystem;
