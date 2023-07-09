@@ -16,6 +16,7 @@ namespace Modules.Item
         {
             itemInfo.OwnerId = characterId;
             ItemManager.Instance.PackItem(this.itemInfo);
+            this.gameObject.SetActive(false);
         }
         
         public bool Use()
@@ -34,12 +35,27 @@ namespace Modules.Item
         {
             _itemTipCtrl= ObjectPool.Instance.Instantiate<ItemTipCtrl>(CGJGame.Path.ItemTip,pos, Quaternion.identity,this.transform
                 ,Space.Self,Vector3.zero);
+            _itemTipCtrl.transform.localPosition = Vector3.up * 2;
             _itemTipCtrl.Show(itemInfo.TipContent);
         }
 
         public void HideTip()
         {
             ObjectPool.Instance.Destory(_itemTipCtrl);
+        }
+        private void OnTriggerEnter(Collider other)
+        {
+            ShowTip(this.transform.position);
+            EventManager.Instance.AddEventListener(CGJGame.Event.OnPackItem, _=>Pack(
+                CharacterManager.Instance.GetBehaviour().characterID));
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            HideTip();
+            EventManager.Instance.RemoveEventListener(CGJGame.Event.OnPackItem, _=>Pack(
+                CharacterManager.Instance.GetBehaviour().characterID));
+
         }
 
         public void Wake(object data = null)

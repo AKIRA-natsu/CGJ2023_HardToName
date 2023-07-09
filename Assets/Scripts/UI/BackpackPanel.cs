@@ -98,13 +98,13 @@ namespace AKIRA.UIFramework {
             foreach (var item in ItemManager.Instance.GetPlayerItem().
                          Where(item => item.OwnerId == characterId).Where(item => item.IsUse==0))
             {
-                GetItem(item.ItemId);
+                GetItem(item);
             }
         }
-        public void GetItem(int id)
+        public void GetItem(ItemInfo itemInfo)
         {
-            GetItemOb().transform.GetComponent<BackpackItemImg>().SetInfo(GetSprite(id),id); 
-           UpdateBackPack();
+            GetItemOb().transform.GetComponent<BackpackItemImg>().SetInfo(GetSprite(itemInfo.ItemId),itemInfo); 
+            UpdateBackPack();
         }
 
         private Sprite GetSprite(int id)
@@ -114,8 +114,10 @@ namespace AKIRA.UIFramework {
 
         private GameObject GetItemOb()
         {
-             return ObjectPool.Instance.Instantiate
+            var ob=ObjectPool.Instance.Instantiate
                 (CGJGame.Path.BackpackItemImg, Vector3.zero, Quaternion.identity, this._backContainerTr);
+            ob.transform.localPosition=Vector3.zero;
+            return ob;
         }
         
         public void UseItem(int id)
@@ -158,5 +160,6 @@ namespace AKIRA.UIFramework {
                 ControllerTips();
             }
         }
+        
     }
 }
