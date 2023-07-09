@@ -12,11 +12,17 @@ public class GameMap : MonoSingleton<GameMap>, ISource {
     public async UniTask Load() {
         await UniTask.Yield();
         levels = this.transform.GetComponentsInChildren<Level>();
-        Level = 0;
+        Level = -1;
         EventManager.Instance.AddEventListener(GameData.Event.OnAppSourceEnd, FirstShowWorldCamera);
         EventManager.Instance.AddEventListener(CGJGame.Event.OnSwitchCameraSub, _ => SwitchToWorldCamera());
         await UniTask.Yield();
         AudioManager.Instance.Play(GameData.Audio.Bg, true);
+        GameManager.Instance.RegistStateAction(GameState.Playing, FirstNextLevel);
+    }
+
+    private void FirstNextLevel() {
+        GameManager.Instance.RemoveStateAction(GameState.Playing, FirstNextLevel);
+        NextLevel();
     }
 
     /// <summary>
@@ -25,13 +31,15 @@ public class GameMap : MonoSingleton<GameMap>, ISource {
     /// <param name="data"></param>
     private void FirstShowWorldCamera(object data) {
         EventManager.Instance.RemoveEventListener(GameData.Event.OnAppSourceEnd, FirstShowWorldCamera);
-        ShowLevel();
+        NextLevel();
     }
 
     /// <summary>
     /// 下一关
     /// </summary>
     public void NextLevel() {
+        if (Level >= levels.Length)
+            return;
         Level++;
         ShowLevel();
     }
@@ -55,10 +63,5 @@ public class GameMap : MonoSingleton<GameMap>, ISource {
         camera.transform.position = worldCameraTrans.position;
         camera.transform.rotation = worldCameraTrans.rotation;
         camera.gameObject.SetActive(true);
-    }
-
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.N))
-            NextLevel();
     }
 }
