@@ -26,7 +26,6 @@ public class GameMap : MonoSingleton<GameMap>, ISource {
     private void FirstShowWorldCamera(object data) {
         EventManager.Instance.RemoveEventListener(GameData.Event.OnAppSourceEnd, FirstShowWorldCamera);
         ShowLevel();
-        SwitchToWorldCamera();
     }
 
     /// <summary>
@@ -42,7 +41,8 @@ public class GameMap : MonoSingleton<GameMap>, ISource {
     /// </summary>
     private void ShowLevel() {
         for (int i = 0; i < levels.Length; i++)
-            levels[i].gameObject.SetActive(i == Level);
+            levels[i].ActiveLevel(i == Level);
+        SwitchToWorldCamera();
     }
 
     /// <summary>
@@ -55,5 +55,10 @@ public class GameMap : MonoSingleton<GameMap>, ISource {
         camera.transform.position = worldCameraTrans.position;
         camera.transform.rotation = worldCameraTrans.rotation;
         camera.gameObject.SetActive(true);
+    }
+
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.N))
+            NextLevel();
     }
 }
