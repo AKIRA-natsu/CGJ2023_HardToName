@@ -165,17 +165,50 @@ MonoBehaviour:
     Name: "\u533B\u751F"
   _itemInfos:
   - ItemId: 1
-    TipContent: "\u751F\u547D\u836F\u6C34\uFF0C\u4F7F\u7528\u80FD\u591F\u6062\u590D30\u70B9\u8840\u91CF"
-    ItemName: "\u751F\u547D\u836F\u6C34"
+    TipContent: "\u97F3\u8D28\u4E0D\u592A\u597D\u7684\u5BF9\u8BB2\u673A"
+    ItemName: "\u5BF9\u8BB2\u673A"
     OwnerId: 0
     IsUse: 0
+    IsPickUp: 0
   - ItemId: 2
-    TipContent: "\u89E3\u9664\u836F\u5242"
-    ItemName: "\u89E3\u836F"
+    TipContent: "\u4E0D\u77E5\u9053\u88C5\u7740\u4EC0\u4E48\u7684\u7BB1\u5B50"
+    ItemName: "\u5B9D\u7BB1"
     OwnerId: 0
     IsUse: 0
+    IsPickUp: 0
   - ItemId: 3
-    TipContent: ppppppppp
-    ItemName: yy
+    TipContent: "\u5939\u7740\u4E00\u5F20\u7EB8\u6761\u7684\u65E5\u8BB0"
+    ItemName: "\u65E5\u8BB0"
     OwnerId: 0
     IsUse: 0
+    IsPickUp: 1
+  - ItemId: 4
+    TipContent: "\u5947\u5F62\u602A\u72B6\u7684\u94A5\u5319"
+    ItemName: "\u94A5\u5319"
+    OwnerId: 0
+    IsUse: 1
+    IsPickUp: 1
+  - ItemId: 5
+    TipContent: "\u6563\u53D1\u7740\u8150\u81ED\u7684\u5C38\u4F53"
+    ItemName: "\u5C38\u4F53"
+    OwnerId: 0
+    IsUse: 0
+    IsPickUp: 0
+  - ItemId: 6
+    TipContent: "\u5F00\u542F\u67D0\u6247\u95E8\u7684\u5F00\u5173"
+    ItemName: "\u5F00\u5173"
+    OwnerId: 0
+    IsUse: 1
+    IsPickUp: 0
+  - ItemId: 7
+    TipContent: "\u6309F\u952E\u8FDB\u884C\u4EA4\u4E92"
+    ItemName: "\u62BD\u5C49"
+    OwnerId: 0
+    IsUse: 1
+    IsPickUp: 0
+  - ItemId: 8
+    TipContent: "\u6309F\u952E\u8FDB\u884C\u4EA4\u4E92"
+    ItemName: "\u67DC\u5B50"
+    OwnerId: 0
+    IsUse: 1
+    IsPickUp: 0
