@@ -73,5 +73,10 @@ namespace Modules.Item
         /// 是否使用,0未使用1已经使用
         /// </summary>
         public int IsUse;
+
+        /// <summary>
+        /// 是否可以捡取
+        /// </summary>
+        public int IsPackUp;
     }
 }
