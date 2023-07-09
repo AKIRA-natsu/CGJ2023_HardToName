@@ -1,3 +1,5 @@
+using System;
+using AKIRA.Data;
 using AKIRA.Manager;
 using AKIRA.UIFramework;
 using UnityEngine;
@@ -10,6 +12,7 @@ namespace Modules.Item
         
         public void ShowTip(Vector3 pos)
         {
+            $"显示提示".Log(GameData.Log.GameState);
             _itemTipCtrl= ObjectPool.Instance.Instantiate<ItemTipCtrl>(CGJGame.Path.ItemTip,pos, Quaternion.identity,this.transform
                 ,Space.Self,Vector3.zero);
             _itemTipCtrl.Show(itemInfo.TipContent);
@@ -35,6 +38,16 @@ namespace Modules.Item
                 UIManager.Instance.Get<BackpackPanel>().UseItem(itemInfo.ItemId);
                 return true;
             }
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            ShowTip(this.transform.position);
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            HideTip();
         }
 
         public void Wake(object data = null)

@@ -1,4 +1,5 @@
 using System;
+using AKIRA.Data;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -13,6 +14,8 @@ namespace Modules.Item
         protected virtual void Start()
         {
             InitData();
+            $"物品初始化".Log(GameData.Log.GameState);
+
         }
 
         /// <summary>
