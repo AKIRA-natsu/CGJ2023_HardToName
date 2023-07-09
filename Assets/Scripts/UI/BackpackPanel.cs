@@ -15,6 +15,7 @@ namespace AKIRA.UIFramework {
         private RectTransform _backContainerTr;
 
         private float _timer;
+        private float timerCountStart;
         
         public override void Awake(object obj) {
             base.Awake(obj);
@@ -108,7 +109,7 @@ namespace AKIRA.UIFramework {
 
         private Sprite GetSprite(int id)
         {
-            return CGJGame.Path.ItemSprite.Load<Sprite>();
+            return $"{CGJGame.Path.ItemSprite}{id}".Load<Sprite>();
         }
 
         private GameObject GetItemOb()
@@ -142,14 +143,16 @@ namespace AKIRA.UIFramework {
         public void GameUpdate()
         {
             //if (GameMap.Instance.Level!=1) return;
+            timerCountStart += Time.deltaTime;
+            if(timerCountStart<10) return;
             _timer+=Time.deltaTime;
-            if (_timer > 10)
+            if (_timer > 60)
             {
                 ControllerTips(1);
                 _timer = 0;
             }
 
-            if (Keyboard.current.anyKey.wasPressedThisFrame)
+            if (Keyboard.current.anyKey.wasPressedThisFrame||(Input.GetMouseButton(0)))
             {
                 _timer = 0;
                 ControllerTips();

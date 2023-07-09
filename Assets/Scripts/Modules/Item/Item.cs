@@ -1,4 +1,5 @@
 using System;
+using AKIRA.Data;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -13,6 +14,8 @@ namespace Modules.Item
         protected virtual void Start()
         {
             InitData();
+            $"物品初始化".Log(GameData.Log.GameState);
+
         }
 
         /// <summary>
@@ -73,5 +76,10 @@ namespace Modules.Item
         /// 是否使用,0未使用1已经使用
         /// </summary>
         public int IsUse;
+
+        /// <summary>
+        /// 是否可以捡取
+        /// </summary>
+        public int IsPackUp;
     }
 }
