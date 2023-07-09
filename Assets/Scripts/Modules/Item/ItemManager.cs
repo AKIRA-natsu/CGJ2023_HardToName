@@ -43,7 +43,7 @@ namespace Modules.Item
             return _itemInfosContainer.FirstOrDefault(item => item.ItemId == itemID);
         }
 
-        public void PackItem(ItemInfo itemInfo,Sprite sprite)
+        public void PackItem(ItemInfo itemInfo)
         {
             if (!_playerItemContainer.Contains(itemInfo))
             {
