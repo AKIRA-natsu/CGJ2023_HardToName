@@ -9,7 +9,7 @@ namespace AKIRA.Behaviour.Prepare {
     /// <summary>
     /// 场景环境
     /// </summary>
-    [Source("Source/Base/[Environment]", GameData.Source.Base, 1)]
+    [Source("Source/Base/[Environment]", GameData.Source.Base, 0)]
     public class Environment : MonoBehaviour {
         // 后处理
         private Volume volume;
