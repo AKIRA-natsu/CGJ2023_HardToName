@@ -80,6 +80,6 @@ namespace Modules.Item
         /// <summary>
         /// 是否可以捡取
         /// </summary>
-        public int IsPackUp;
+        public int IsPickUp;
     }
 }
