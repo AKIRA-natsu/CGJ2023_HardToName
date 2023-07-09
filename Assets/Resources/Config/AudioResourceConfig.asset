@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9941d401d4d59d54a8b820cfe00dcdee, type: 3}
   m_Name: AudioResourceConfig
   m_EditorClassIdentifier: 
-  datas: []
+  datas:
+  - tag: KeyboardKock
+    audio: {fileID: 8300000, guid: ca1e396f90dca96468a5bcf1b18690e1, type: 3}
+  - tag: Bg
+    audio: {fileID: 8300000, guid: 8285d4c7d631f3643b2d9de34aa56435, type: 3}

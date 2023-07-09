@@ -1,5 +1,6 @@
 using AKIRA.Data;
 using AKIRA.Manager;
+using AKIRA.Manager.Audio;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -14,6 +15,8 @@ public class GameMap : MonoSingleton<GameMap>, ISource {
         Level = 0;
         EventManager.Instance.AddEventListener(GameData.Event.OnAppSourceEnd, FirstShowWorldCamera);
         EventManager.Instance.AddEventListener(CGJGame.Event.OnSwitchCameraSub, _ => SwitchToWorldCamera());
+        await UniTask.Yield();
+        AudioManager.Instance.Play(GameData.Audio.Bg, true);
     }
 
     /// <summary>

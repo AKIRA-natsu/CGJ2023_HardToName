@@ -6,6 +6,9 @@ public class Level : MonoBehaviour {
 
     [SerializeField]
     private int numCount = 3;
+    /// <summary>
+    /// 随机的密码
+    /// </summary>
     public int[] nums;
 
     /// <summary>
