@@ -130,6 +130,8 @@ public class CharacterManager : MonoSingleton<CharacterManager>, ISource, IUpdat
     /// </summary>
     /// <param name="enabled"></param>
     public void UpdateCursor(bool enabled) {
+        if (!GameManager.IsStateEqual(GameState.Playing))
+            return;
         cursorEnabled = enabled;
         Cursor.visible = enabled;
         CameraExtend.GetCamera(GameData.Camera.Main).GetComponent<CinemachineFreeLook>().enabled = !enabled;

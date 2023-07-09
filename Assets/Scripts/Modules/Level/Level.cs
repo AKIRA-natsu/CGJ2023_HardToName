@@ -14,7 +14,7 @@ public class Level : MonoBehaviour {
     /// <summary>
     /// 关卡开始
     /// </summary>
-    public void OnLevelStart(bool active) {
+    public void ActiveLevel(bool active) {
         this.gameObject.SetActive(active);
         if (active) {
             nums = new int[numCount];
