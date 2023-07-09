@@ -22,6 +22,7 @@ public class CGJGame {
         public const string OnSwitchCameraMain = "OnSwitchCameraMain";
 
         public const string OnPackItem = "OnPackItem";
+        public const string OnPasswordEnter = "OnPasswordEnter";
     }
 
     /// <summary>
