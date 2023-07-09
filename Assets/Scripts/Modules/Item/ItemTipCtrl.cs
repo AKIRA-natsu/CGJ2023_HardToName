@@ -17,7 +17,7 @@ public class ItemTipCtrl : MonoBehaviour,IPool
     }
     public void Wake(object data = null)
     {
-        this.transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutBack);
+        this.transform.DOScale(Vector3.one*5, 0.3f).SetEase(Ease.OutBack);
     }
 
     public void Recycle(object data = null)

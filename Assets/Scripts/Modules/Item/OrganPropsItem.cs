@@ -15,6 +15,8 @@ namespace Modules.Item
             $"显示提示".Log(GameData.Log.GameState);
             _itemTipCtrl= ObjectPool.Instance.Instantiate<ItemTipCtrl>(CGJGame.Path.ItemTip,pos, Quaternion.identity,this.transform
                 ,Space.Self,Vector3.zero);
+            _itemTipCtrl.transform.localPosition = Vector3.up * 2;
+            
             _itemTipCtrl.Show(itemInfo.TipContent);
         }
 
@@ -48,6 +50,7 @@ namespace Modules.Item
         private void OnTriggerExit(Collider other)
         {
             HideTip();
+
         }
 
         public void Wake(object data = null)
