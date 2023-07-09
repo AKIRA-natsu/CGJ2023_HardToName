@@ -7,12 +7,12 @@ using UnityEngine;
 [Source("Source/Base/[GameMap]", GameData.Source.Scene, 1)]
 public class GameMap : MonoSingleton<GameMap>, ISource {
     private Level[] levels;
-    public int level;
+    public int Level { get; private set; }
 
     public async UniTask Load() {
         await UniTask.Yield();
         levels = this.transform.GetComponentsInChildren<Level>();
-        level = 0;
+        Level = -1;
         EventManager.Instance.AddEventListener(GameData.Event.OnAppSourceEnd, FirstShowWorldCamera);
         EventManager.Instance.AddEventListener(CGJGame.Event.OnSwitchCameraSub, _ => SwitchToWorldCamera());
         await UniTask.Yield();
@@ -38,10 +38,10 @@ public class GameMap : MonoSingleton<GameMap>, ISource {
     /// 下一关
     /// </summary>
     public void NextLevel() {
-        if (level >= levels.Length)
+        if (Level >= levels.Length)
             return;
+        Level++;
         ShowLevel();
-        level++;
     }
 
     /// <summary>
@@ -49,7 +49,7 @@ public class GameMap : MonoSingleton<GameMap>, ISource {
     /// </summary>
     private void ShowLevel() {
         for (int i = 0; i < levels.Length; i++)
-            levels[i].ActiveLevel(i == level);
+            levels[i].ActiveLevel(i == Level);
         SwitchToWorldCamera();
     }
 
@@ -59,7 +59,7 @@ public class GameMap : MonoSingleton<GameMap>, ISource {
     public void SwitchToWorldCamera() {
         CameraExtend.GetCamera(GameData.Camera.Main).SetActive(true);
         var camera = CameraExtend.GetCamera(GameData.Camera.Sub);
-        var worldCameraTrans = levels[level].worldCamera;
+        var worldCameraTrans = levels[Level].worldCamera;
         camera.transform.position = worldCameraTrans.position;
         camera.transform.rotation = worldCameraTrans.rotation;
         camera.gameObject.SetActive(true);
